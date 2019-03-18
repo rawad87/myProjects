@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <p>ferdighet 9b</p>
+   <div id="info"></div>
+    <input type="text" id="text1" oninput="findFirst()" value="Rawad" /><br />
+    <input type="text" id="text2" oninput="findFirst()" value="Skafik" /><br />
+    <input type="text" id="text3" oninput="findFirst()" value="Christin" /><br />
+   
+    <script>
+        var infoDiv = document.getElementById('info');
+        var textDiv1 = document.getElementById('text1');
+        var textDiv2 = document.getElementById('text2');
+        var textDiv3 = document.getElementById('text3');
+        findFirst();
+
+        function findFirst() {
+            var text1 = textDiv1.value;
+            var text2 = textDiv2.value;
+            var text3 = textDiv3.value;
+
+            infoDiv.innerText = '';
+
+            if (text1 == text2) infoDiv.innerHTML += 'text 1 og text 2 er like<br/>';
+            if (text1 != text2) infoDiv.innerHTML += '<del>tekst 1 og tekst 2 er like</del><br/>';
+
+            if (text1 == text3) infoDiv.innerHTML += 'tekst 1 og 3 er like<br/>';
+            if (text1 != text3) infoDiv.innerHTML += '<del> tekst 1 og 3 er like </del><br/>';
+
+            if (text3 == text2) infoDiv.innerHTML += 'tekst 3 og 2 er like <br/>';
+            if (text3 != text2) infoDiv.innerHTML += '<del> tekst 3 og 2 er like</del><br/>';
+
+
+            infoDiv.innerHTML += 'om vi sorterer de tre tekstene, er denne den første:<br/>';
+            if (text1 <= text2) {
+                if (text3 <= text1) infoDiv.innerHTML += text3;
+                else infoDiv.innerHTML += text1;
+            } else {
+                if (text3 <= text2) infoDiv.innerHTML += text3;
+                else infoDiv.innerHTML += text2;
+            }
+
+        }
+    </script>
+</body>
+</html>
