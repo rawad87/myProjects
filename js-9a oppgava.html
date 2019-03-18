@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .box {
+            background-color: aqua;
+            display: block;
+            margin: 4px;
+        }
+
+        .selected:before {
+            content: "Valgt:";
+        }
+    </style>
+</head>
+<body>
+
+    <input id="bredde" type="range" oninput="calcultate()" min="1" max="100" step="1" value="2" />
+    <input id="høyde" type="range" oninput="calcultate()" min="1" max="100" step="2" value="2" />
+
+    <div id="Div1" onclick="selectDiv(this)" class="box">firstDiv</div>
+    <div id="Div2" onclick="selectDiv(this)" class="box">secondDiv</div>
+    <div id="resultat" class="box"></div>
+    <script>
+        var resultatDiv1 = document.getElementById('Div1');
+        var resultatDiv2 = document.getElementById('Div2');
+        var resultatDiv = document.getElementById('resultat');
+        var breddeInput = document.getElementById('bredde');
+        var høydeInput = document.getElementById('høyde');
+        var selected;
+
+        function selectDiv(clicked) {
+            if (selected)
+                selected.classList.toggle('selected', false);
+            selected = clicked;
+            clicked.classList.toggle('selected', true);
+
+        }
+
+
+        function calcultate() {
+            var bredde = parseInt(breddeInput.value);
+            var høyde = parseInt(høydeInput.value);
+            var arealet = bredde * høyde;
+            resultatDiv.innerHTML = '';
+            selected.style.width = bredde + 'px';
+            selected.style.height = høyde + 'px';
+            var areal1 = parseInt(resultatDiv1.style.height) * parseInt(resultatDiv1.style.width);
+            var areal2 = parseInt(resultatDiv2.style.height) * parseInt(resultatDiv2.style.width);
+            
+            
+            if (bredde == høyde) {
+                resultatDiv.innerHTML = 'bredde' + '=' + ' ' + bredde + ' ' + 'høyde ' + '=' + høyde + ' : ' + 'arealet' + ' = ' + arealet;
+
+            } else {
+                resultatDiv.innerHTML = 'bredde' + '=' + ' ' + bredde + ' ' + 'høyde ' + ' = ' + høyde + ' : ' + 'arealet' + ' = ' + arealet;
+
+            }
+            if (areal1 == areal2) {
+                resultatDiv.innerHTML = 'arealet1 er lik arealet2';
+            }
+            else if (areal1 > areal2) {
+                resultatDiv.innerHTML = 'arealet1 er større enn arealet2';
+            }
+            else if (areal1 < areal2) {
+                resultatDiv.innerHTML = 'arealet1 er mindre enn arealet2';
+            }
+
+        }
+            
+            
+
+        
+        
+
+    </script>
+</body>
+</html>
