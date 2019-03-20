@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .selscted {
+            background-color: #99ffaa;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="myText">
+
+    <p>Write your name and click the button for registering.</p>
+    <div id="theItem"></div>
+
+    <button onclick="registering()">check in</button>
+
+    <p id="lolo"></p>
+
+    <script>
+        var theName = document.getElementById("lolo");
+        var theItem = document.getElementById('theItem');
+        function registering(el) {
+            var el;
+            var date = new Date();
+            var name = document.getElementById("myText").value;
+            if (name == '') {
+                document.getElementById('lolo').innerHTML = 'write you name first';
+            } else if (name !== '') {
+                theName.innerHTML = 'hello ' + name + ': ' + 'you are regisred at ' + date.toLocaleString();
+            } else if (name == el) {
+                theItem.classList.remove('selscted');
+            }
+            theItem.classList.add('selscted');
+}
+    </script>
+</body>
+</html>
