@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        div {
+            color: green;
+       background-color: gray;
+        width: 100px;
+        height: 100px;
+        float: left;
+        margin: 20px;
+        font-size: 500%;
+        font-family: Helvetica;
+        text-align: center;
+        vertical-align: middle;
+        }
+        div.first {
+        clear : left;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="lol"></h1>
+    <a id="link" href="javascript:location.reload()"></a><br/>
+    <div onclick="setX(this)" class="first"></div>
+    <div onclick="setX(this)"></div>
+    <div onclick="setX(this)"></div>
+
+
+    <div onclick="setX(this)" class="first"></div>
+    <div onclick="setX(this)"></div>
+    <div onclick="setX(this)"></div>
+
+
+    <div onclick="setX(this)" class="first"></div>
+    <div onclick="setX(this)"></div>
+    <div onclick="setX(this)"></div>
+
+    <script type="text/javascript">
+        var isGameStopped = false;
+        function setX(divElement) {
+
+            if (!isGameStopped && 
+                divElement.innerHTML !== 'x' && divElement.innerHTML !== 'o') {
+                divElement.innerHTML = 'x';
+
+                checkWinning();
+                if (isGameStopped) return;
+
+                var divs1 = document.getElementsByTagName('div');
+                var divs2 = new Array();
+                for (var i = 0; i < divs1.length; i++) {
+                    if (divs1[i].innerHTML !== 'x' && divs1[i].innerHTML !== 'o') {
+                        divs2.push(divs1[i]);
+                    }
+                }
+                if (divs2.length > 0) {
+                    var index = Math.floor(Math.random() * divs2.length);
+                    divs2[index].innerHTML = 'o';
+                    divs2[index].style.color = 'blue';
+                }
+                checkWinning();
+
+
+
+            }
+
+        }
+        function checkWinning() {
+            checkForWinning(0, 1, 2);
+            if (isGameStopped) return;
+            checkForWinning(3, 4, 5);
+            if (isGameStopped) return;
+            checkForWinning(6, 7, 8);
+            if (isGameStopped) return;
+            checkForWinning(0, 3, 6);
+            if (isGameStopped) return;
+            checkForWinning(1, 4, 7);
+            if (isGameStopped) return;
+            checkForWinning(2, 5, 8);
+            if (isGameStopped) return;
+            checkForWinning(0, 4, 8);
+            if (isGameStopped) return;
+            checkForWinning(2, 4, 6);
+        }
+        function checkForWinning(index1,index2,index3){
+            var divs = document.getElementsByTagName('div');
+            var content1 = divs[index1].innerHTML;
+            var content2 = divs[index2].innerHTML;
+            var content3 = divs[index3].innerHTML;
+           
+            if ((content1 === 'x' || content1 === 'o')
+                && content2 === content1
+                && content3 === content1) {
+                var winner = content1 === 'x' ? 'du' : 'datamaskinen' ; 
+
+                document.getElementById('lol').innerHTML = winner + ' vant';
+                document.getElementById('link').innerHTML =  ' Klick her for å starte på nytt';
+                isGameStopped = true;
+            }
+        }
+    </script>
+</body>
+</html>
